@@ -18,7 +18,7 @@ schemes:
 paths:
   /games:
     post:
-      summary: create new game 
+      summary: create new game
       description: will create a new game in the current season
       consumes:
       - application/json
@@ -29,7 +29,7 @@ paths:
           in: body
           description: new game information
           schema:
-            required: 
+            required:
               - game
             properties:
               date:
@@ -45,7 +45,7 @@ paths:
         201:
           description: created a new game
           schema:
-            required: 
+            required:
               - data
             properties:
               id:
@@ -92,8 +92,35 @@ paths:
            $ref: "#/definitions/CurrentGame"
         404:
           description: invalid id
+    put:
+      summary: update game
+      description: change host, toggle that supplies need transporting and end a game
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - name: game
+          in: body
+          description: fields of a game that can be changed
+          schema:
+            required:
+              - game
+            properties:
+              hostId:
+                type: string
+              transportRequired:
+                type: boolean
+              finished:
+                type: boolean
+      responses:
+        200:
+          description: game changed
+        400:
+          description: invalid input
 
-  /games/current/players:
+
+  /games/current/playerss:
     get:
       summary: get players not in the current game
       description: will return the players not in the game
@@ -117,7 +144,49 @@ paths:
           description: invalid input
 
     post:
-      summary: create a new player
+      summary: add an exiting player to the game or create a new player
+      description: will add an exiting player to the game or create a new player and add the player to the current game
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - name: newPlayer
+          in: body
+          description: new player information
+          schema:
+            required:
+              - player
+            properties:
+              playerId:
+                type: string
+                description: not null if existing player otherwise null
+              name:
+                type: string
+                description: null if existing player otherwise not null
+              email:
+                type: string
+                description: null if existing player otherwise not null
+              buyIn:
+                type: boolean
+              annualToc:
+                type: boolean
+              quarterlyToc:
+                type: boolean
+      responses:
+        201:
+          description: a new player was created and added to the game
+          schema:
+            required:
+              - data
+            properties:
+              id:
+                type: integer
+        400:
+          description: invalid input
+
+    put:
+      summary: update player
       description: will create a new player and add the player to the current game
       consumes:
       - application/json
@@ -128,18 +197,32 @@ paths:
           in: body
           description: new player information
           schema:
-            required: 
+            required:
               - newPlayer
             properties:
-              name:
+              playerId:
                 type: string
-              email:
-                type: string
+              buyIn:
+                type: boolean
+              annualToc:
+                type: boolean
+              quarterlyToc:
+                type: boolean
+              reBuy:
+                type: boolean
+              place:
+                type: integer
+              chop:
+                type: integer
+              optInRoundNotifiction:
+                type: boolean
+              banker:
+                type: boolean
       responses:
         201:
           description: a new player was created and added to the game
           schema:
-            required: 
+            required:
               - data
             properties:
               id:
@@ -160,7 +243,7 @@ paths:
           in: body
           description: seating information
           schema:
-            required: 
+            required:
               - seating
             properties:
               numTables:
@@ -183,7 +266,7 @@ paths:
 
 definitions:
   Game:
-    required: 
+    required:
       - game
     properties:
       id:
@@ -216,13 +299,13 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/GamePlayer"
-      payouts:
+      payoutss:
         type: array
         items:
           $ref: "#/definitions/Payout"
 
   Player:
-    required: 
+    required:
       - player
     properties:
       playerId:
@@ -231,7 +314,7 @@ definitions:
         type: string
 
   Payout:
-    required: 
+    required:
       - payout
     properties:
       place:
@@ -240,7 +323,7 @@ definitions:
         type: integer
 
   CurrentGame:
-    required: 
+    required:
       - currentGame
     properties:
       id:
@@ -274,9 +357,13 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/Payout"
+      tables:
+        type: array
+        items:
+          $ref: "#/definitions/SeatedPlayer"
 
   GamePlayer:
-    required: 
+    required:
       - player
     properties:
       playerId:
@@ -299,7 +386,7 @@ definitions:
         type: integer
 
   SeatPlayer:
-    required: 
+    required:
       - playerAtSeat
     properties:
       playerId:
@@ -308,10 +395,18 @@ definitions:
         type: integer
 
   SeatedPlayer:
-    required: 
+    required:
       - seated
     properties:
-      name:
-        type: string
       table:
         type: integer
+      seated:
+        type: array
+        items:
+          required:
+            - nameSeat
+          properties:
+            name:
+              type: string
+            seat:
+              type: integer
