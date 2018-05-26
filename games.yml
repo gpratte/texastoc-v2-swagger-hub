@@ -1,0 +1,317 @@
+swagger: '2.0'
+info:
+  description: Game related APIs
+  version: "1.0.0"
+  title: Game related APIs
+  contact:
+    email: info@texastoc.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+host: api.texastoc.com
+basePath: /v2
+
+schemes:
+ - https
+
+paths:
+  /games:
+    post:
+      summary: create new game 
+      description: will create a new game in the current season
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - name: game
+          in: body
+          description: new game information
+          schema:
+            required: 
+              - game
+            properties:
+              date:
+                type: string
+                format: date
+              hostId:
+                type: integer
+              transportRequired:
+                type: boolean
+              doubleBuyin:
+                type: boolean
+      responses:
+        201:
+          description: created a new game
+          schema:
+            required: 
+              - data
+            properties:
+              id:
+                type: integer
+        400:
+          description: invalid input
+
+  /games/{seasonId}:
+    get:
+      summary: get the games for the given season
+      description: return the games for the the given season
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - name: seasonId
+          in: path
+          required: true
+          description: the season id
+          type: string
+      responses:
+        200:
+          description: the games
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Game"
+        404:
+          description: invalid id
+
+  /games/current:
+    get:
+      summary: get the current game in progress
+      description: return the current game in progress
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: the game in progress
+          schema:
+           $ref: "#/definitions/CurrentGame"
+        404:
+          description: invalid id
+
+  /games/current/players:
+    get:
+      summary: get players not in the current game
+      description: will return the players not in the game
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - name: included
+          in: query
+          description: true to get the players that have already been added to game, false for the other players
+          type: boolean
+      responses:
+        201:
+          description: a list of players
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Player"
+        400:
+          description: invalid input
+
+    post:
+      summary: create a new player
+      description: will create a new player and add the player to the current game
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - name: newPlayer
+          in: body
+          description: new player information
+          schema:
+            required: 
+              - newPlayer
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+      responses:
+        201:
+          description: a new player was created and added to the game
+          schema:
+            required: 
+              - data
+            properties:
+              id:
+                type: integer
+        400:
+          description: invalid input
+
+  /games/current/seating:
+    post:
+      summary: seat players at tables
+      description: will seat players at table and text if the player has a phone number
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - name: seating
+          in: body
+          description: seating information
+          schema:
+            required: 
+              - seating
+            properties:
+              numTables:
+                type: integer
+              numSeatsPerTable:
+                type: integer
+              seatPlayers:
+                type: array
+                items:
+                  $ref: "#/definitions/SeatPlayer"
+      responses:
+        201:
+          description: a new player was created and added to the game
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/SeatedPlayer"
+        400:
+          description: invalid input
+
+definitions:
+  Game:
+    required: 
+      - game
+    properties:
+      id:
+        type: integer
+      date:
+        type: string
+        format: date
+      started:
+        type: string
+        format: date
+      host:
+        type: string
+      seasonOrdinal:
+        type: integer
+      quarterlyOrdinal:
+        type: integer
+      numPlayers:
+        type: integer
+      doubleBuyIn:
+        type: boolean
+      buyIn:
+        type: integer
+      rebuyAddOn:
+        type: integer
+      annualTocAmount:
+        type: integer
+      quarterlyTocAmount:
+        type: integer
+      players:
+        type: array
+        items:
+          $ref: "#/definitions/GamePlayer"
+      payouts:
+        type: array
+        items:
+          $ref: "#/definitions/Payout"
+
+  Player:
+    required: 
+      - player
+    properties:
+      playerId:
+        type: integer
+      name:
+        type: string
+
+  Payout:
+    required: 
+      - payout
+    properties:
+      place:
+        type: integer
+      amount:
+        type: integer
+
+  CurrentGame:
+    required: 
+      - currentGame
+    properties:
+      id:
+        type: integer
+      clockId:
+        type: integer
+      date:
+        type: string
+        format: date
+      host:
+        type: string
+      kitty:
+        type: integer
+      doubleBuyIn:
+        type: boolean
+      transportRequired:
+        type: boolean
+      totalBuyIn:
+        type: integer
+      totalRebuyAddOn:
+        type: integer
+      totalAnnualTocAmount:
+        type: integer
+      totalQuarterlyTocAmount:
+        type: integer
+      players:
+        type: array
+        items:
+          $ref: "#/definitions/GamePlayer"
+      payouts:
+        type: array
+        items:
+          $ref: "#/definitions/Payout"
+
+  GamePlayer:
+    required: 
+      - player
+    properties:
+      playerId:
+        type: integer
+      name:
+        type: string
+      place:
+        type: integer
+      points:
+        type: integer
+      buyIn:
+        type: integer
+      reBuy:
+        type: integer
+      annualToc:
+        type: integer
+      quarterlyToc:
+        type: integer
+      chop:
+        type: integer
+
+  SeatPlayer:
+    required: 
+      - playerAtSeat
+    properties:
+      playerId:
+        type: integer
+      table:
+        type: integer
+
+  SeatedPlayer:
+    required: 
+      - seated
+    properties:
+      name:
+        type: string
+      table:
+        type: integer

@@ -1,0 +1,61 @@
+swagger: '2.0'
+info:
+  description: Supply related APIs
+  version: "1.0.0"
+  title: Supply related APIs
+  contact:
+    email: info@texastoc.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+host: api.texastoc.com
+basePath: /v2
+
+schemes:
+ - https
+
+paths:
+  /supplies:
+    get:
+      summary: get all the supplies
+      description: return all the supplies
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: the supplies
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Supply"
+
+definitions:
+  Supply:
+    required: 
+      - supply
+    properties:
+      kittyAmount:
+        type: integer
+      supplies:
+        type: array
+        items:
+          $ref: "#/definitions/Supplies"
+
+  Supplies:
+    required: 
+      - supplies
+    properties:
+      date:
+        type: string
+        format: date
+      name:
+        type: string
+      type:
+        type: string
+      cost:
+        type: integer
+      description:
+        type: string

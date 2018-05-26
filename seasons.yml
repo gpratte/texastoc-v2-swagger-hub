@@ -1,0 +1,175 @@
+swagger: '2.0'
+info:
+  description: Season APIs
+  version: "1.0.0"
+  title: Season related APIs
+  contact:
+    email: info@texastoc.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+host: api.texastoc.com
+basePath: /v2
+
+schemes:
+ - https
+
+paths:
+  /seasons:
+    post:
+      summary: create new season
+      description: will create a new season of 365 days along with the 4 quarters
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - name: season
+          in: body
+          description: new season information
+          schema:
+            required: 
+              - season
+            properties:
+              monday:
+                type: string
+                format: date
+              kittyAmount:
+                type: integer
+              annualTocAmount:
+                type: integer
+              quarterlyTocAmount:
+                type: integer
+              numQuarterlyPayouts:
+                type: integer
+      responses:
+        201:
+          description: created a new season
+          schema:
+            required: 
+              - data
+            properties:
+              id:
+                type: integer
+        400:
+          description: invalid input
+    get:
+      summary: get the current season 
+      description: return the current season along with the quarterly seasons
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: the season
+          schema:
+            $ref: "#/definitions/Season"
+
+  /seasons/{id}:
+    get:
+      summary: get the current season 
+      description: return the current season along with the quarterly seasons
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: the season id
+          type: integer
+      responses:
+        200:
+          description: the season
+          schema:
+            $ref: "#/definitions/Season"
+        404:
+          description: invalid id
+
+definitions:
+  Season:
+    required: 
+      - season
+    properties:
+      id:
+        type: integer
+      start:
+        type: string
+        format: date
+      end:
+        type: string
+        format: date
+      numGames:
+        type: integer
+      buyIn:
+        type: integer
+      rebuyAddOn:
+        type: integer
+      annualTocAmount:
+        type: integer
+      players:
+        type: array
+        items:
+          $ref: "#/definitions/Player"
+      payouts:
+        type: array
+        items:
+          $ref: "#/definitions/Payout"
+      quarters:
+        type: array
+        items:
+          $ref: "#/definitions/Quarter"
+
+  Player:
+    required: 
+      - player
+    properties:
+      playerId:
+        type: integer
+      name:
+        type: string
+      place:
+        type: integer
+      points:
+        type: integer
+      entries:
+        type: integer
+
+  Payout:
+    required: 
+      - payout
+    properties:
+      place:
+        type: integer
+      amount:
+        type: integer
+
+  Quarter:
+    required: 
+      - quarter
+    properties:
+      id:
+        type: integer
+      start:
+        type: string
+        format: date
+      end:
+        type: string
+        format: date
+      quater:
+        type: integer
+      numGames:
+        type: integer
+      quarterlyTocAmount:
+        type: integer
+      players:
+        type: array
+        items:
+          $ref: "#/definitions/Player"
+      payouts:
+        type: array
+        items:
+          $ref: "#/definitions/Payout"
