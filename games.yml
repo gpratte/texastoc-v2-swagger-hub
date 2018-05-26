@@ -120,7 +120,7 @@ paths:
           description: invalid input
 
 
-  /games/current/playerss:
+  /games/current/players:
     get:
       summary: get players not in the current game
       description: will return the players not in the game
@@ -263,6 +263,56 @@ paths:
               $ref: "#/definitions/SeatedPlayer"
         400:
           description: invalid input
+
+  /games/current/clock:
+    get:
+      summary: get the current game clock
+      description: return the current game clock
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: the clock
+          schema:
+           $ref: "#/definitions/Clock"
+    put:
+      summary: update clock
+      description: clock controls
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - name: clock
+          in: body
+          description: clock controls
+          schema:
+            required:
+              - clock
+            properties:
+              play:
+                type: boolean
+                description: true to play, false to pause
+              nextRound:
+                type: boolean
+                description: true to move to next round
+              previousRound:
+                type: boolean
+                description: true to move to previous round
+              minutes:
+                type: integer
+                description: set to change the minutes otherwise null
+              seconds:
+                type: integer
+                description: set to change the seconds otherwise null
+      responses:
+        201:
+          description: clock changed
+        400:
+          description: invalid input
+
 
 definitions:
   Game:
@@ -410,3 +460,33 @@ definitions:
               type: string
             seat:
               type: integer
+
+  Clock:
+    required:
+      - clock
+    properties:
+      clockId:
+        type: integer
+      minutes:
+        type: integer
+      seconds:
+        type: integer
+      playing:
+        type: boolean
+      thisRound:
+        $ref: "#/definitions/Round"
+      nextRound:
+        $ref: "#/definitions/Round"
+
+  Round:
+    required:
+      - round
+    properties:
+      round:
+        type: integer
+      smallBlind:
+        type: integer
+      bigBlind:
+        type: integer
+      Ante:
+        type: integer
