@@ -9,10 +9,11 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
-host: api.texastoc.com
+host: api-texastoc.herokuapp.com
 basePath: /v2
 
 schemes:
+ - http
  - https
 
 paths:
