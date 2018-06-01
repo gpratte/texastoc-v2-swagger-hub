@@ -54,7 +54,7 @@ paths:
         400:
           description: invalid input
 
-  /games/{seasonId}:
+  /games/season/{seasonId}:
     get:
       summary: get the games for the given season
       description: return the games for the the given season
