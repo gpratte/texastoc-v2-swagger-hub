@@ -350,7 +350,7 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/GamePlayer"
-      payoutss:
+      payouts:
         type: array
         items:
           $ref: "#/definitions/Payout"
