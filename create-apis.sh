@@ -90,5 +90,90 @@ curl -X POST http://$HOST/__admin/mappings -d '
    }
 }'
 
+# Get the current game
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"GET",
+      "urlPathPattern":"/v2/games/current"
+   },
+   "response":{
+      "jsonBody":{
+         "annualTocAmount":340,
+         "buyIn":680,
+         "clockId":3,
+         "date":"2018-06-02",
+         "doubleBuyIn":false,
+         "hostId":4,
+         "hostName":"Brian Baker",
+         "id":1,
+         "kitty":10,
+         "numPlayers":2,
+         "payouts":[
+            {
+               "amount":100,
+               "place":1
+            },
+            {
+               "amount":85,
+               "place":2
+            }
+         ],
+         "players":[
+            {
+               "annualToc":10,
+               "buyIn":30,
+               "chop":null,
+               "id":4,
+               "name":"Brian Baker",
+               "place":1,
+               "playerId":0,
+               "points":124,
+               "quarterlyToc":10,
+               "reBuy":20
+            },
+            {
+               "annualToc":null,
+               "buyIn":30,
+               "chop":null,
+               "id":5,
+               "name":"John Hiatt",
+               "place":null,
+               "playerId":0,
+               "points":null,
+               "quarterlyToc":null,
+               "reBuy":null
+            }
+         ],
+         "quarterlyOrdinal":1,
+         "quarterlyTocAmount":120,
+         "rebuyAddOn":200,
+         "seasonOrdinal":1,
+         "start":"18:55:44.737",
+         "tables":[
+            {
+               "number":1,
+               "seats":[
+                  {
+                     "gamePlayerId":3,
+                     "gamePlayerName":"Joey Baloney",
+                     "number":1
+                  },
+                  {
+                     "gamePlayerId":5,
+                     "gamePlayerName":"Bob your uncle",
+                     "number":2
+                  }
+               ]
+            }
+         ],
+         "transportRequired":true
+      },
+      "headers":{
+         "Content-Type":"application/json"
+      }
+   }
+}'
+
 # See all apis
 curl http://$HOST/__admin/
