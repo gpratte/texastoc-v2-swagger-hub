@@ -33,37 +33,55 @@ curl -X POST http://$HOST/__admin/mappings -d '
    "response":{
       "jsonBody":[
          {
-            "id":0,
-            "date":"string",
-            "started":"string",
-            "host":"string",
-            "seasonOrdinal":0,
-            "quarterlyOrdinal":0,
-            "numPlayers":0,
-            "doubleBuyIn":true,
-            "buyIn":0,
-            "rebuyAddOn":0,
-            "annualTocAmount":0,
-            "quarterlyTocAmount":0,
-            "players":[
-               {
-                  "playerId":0,
-                  "name":"string",
-                  "place":0,
-                  "points":0,
-                  "buyIn":0,
-                  "reBuy":0,
-                  "annualToc":0,
-                  "quarterlyToc":0,
-                  "chop":0
-               }
-            ],
+            "annualTocAmount":340,
+            "buyIn":680,
+            "date":"2018-06-02",
+            "doubleBuyIn":false,
+            "hostId":4,
+            "hostName":"Brian Baker",
+            "id":1,
+            "numPlayers":2,
             "payouts":[
                {
-                  "place":0,
-                  "amount":0
+                  "amount":100,
+                  "place":1
+               },
+               {
+                  "amount":85,
+                  "place":2
                }
-            ]
+            ],
+            "players":[
+               {
+                  "annualToc":10,
+                  "buyIn":30,
+                  "chop":null,
+                  "id":4,
+                  "name":"Brian Baker",
+                  "place":1,
+                  "playerId":0,
+                  "points":124,
+                  "quarterlyToc":10,
+                  "reBuy":20
+               },
+               {
+                  "annualToc":null,
+                  "buyIn":30,
+                  "chop":null,
+                  "id":5,
+                  "name":"John Hiatt",
+                  "place":null,
+                  "playerId":0,
+                  "points":null,
+                  "quarterlyToc":null,
+                  "reBuy":null
+               }
+            ],
+            "quarterlyOrdinal":1,
+            "quarterlyTocAmount":120,
+            "rebuyAddOn":200,
+            "seasonOrdinal":1,
+            "start":"16:15:36.81"
          }
       ],
       "headers":{

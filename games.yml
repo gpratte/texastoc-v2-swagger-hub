@@ -328,7 +328,9 @@ definitions:
       started:
         type: string
         format: date
-      host:
+      hostId:
+        type: integer
+      hostName:
         type: string
       seasonOrdinal:
         type: integer
@@ -384,7 +386,9 @@ definitions:
       date:
         type: string
         format: date
-      host:
+      hostId:
+        type: integer
+      hostName:
         type: string
       kitty:
         type: integer
@@ -417,6 +421,8 @@ definitions:
     required:
       - player
     properties:
+      id:
+        type: integer
       playerId:
         type: integer
       name:
