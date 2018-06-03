@@ -11,7 +11,7 @@ curl -X POST http://$HOST/__admin/mappings -d '
 {
    "request":{
       "method":"POST",
-      "url":"/v2/games"
+      "url":"/api/v2/games"
    },
    "response":{
       "jsonBody":{
@@ -28,7 +28,7 @@ curl -X POST http://$HOST/__admin/mappings -d '
 {
    "request":{
       "method":"GET",
-      "urlPathPattern":"/v2/games/season/([0-9]+)"
+      "urlPathPattern":"/api/v2/games/season/([0-9]+)"
    },
    "response":{
       "jsonBody":[
@@ -95,7 +95,7 @@ curl -X POST http://$HOST/__admin/mappings -d '
 {
    "request":{
       "method":"GET",
-      "urlPathPattern":"/v2/games/current"
+      "url":"/api/v2/games/current"
    },
    "response":{
       "jsonBody":{
@@ -172,6 +172,17 @@ curl -X POST http://$HOST/__admin/mappings -d '
       "headers":{
          "Content-Type":"application/json"
       }
+   }
+}'
+
+# Update a game
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"PUT",
+      "url":"/api/v2/games/current"
+   },
+   "response":{
    }
 }'
 

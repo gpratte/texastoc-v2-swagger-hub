@@ -10,7 +10,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
 host: api-texastoc.herokuapp.com
-basePath: /v2
+basePath: /api/v2
 
 schemes:
  - http
@@ -109,7 +109,7 @@ paths:
               - game
             properties:
               hostId:
-                type: string
+                type: integer
               transportRequired:
                 type: boolean
               finished:
@@ -340,6 +340,8 @@ definitions:
         type: integer
       doubleBuyIn:
         type: boolean
+      kitty:
+        type: integer
       buyIn:
         type: integer
       rebuyAddOn:
