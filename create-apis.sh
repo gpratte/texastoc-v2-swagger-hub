@@ -261,5 +261,36 @@ curl -X POST http://$HOST/__admin/mappings -d '
    }
 }'
 
+# Seat players at tables
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"POST",
+      "url":"/api/v2/games/current/seating"
+   },
+   "response":{
+      "jsonBody":[
+         {
+            "number":1,
+            "seats":[
+               {
+                  "gamePlayerId":3,
+                  "gamePlayerName":"Joey Baloney",
+                  "number":1
+               },
+               {
+                  "gamePlayerId":5,
+                  "gamePlayerName":"Bob your uncle",
+                  "number":2
+               }
+            ]
+         }
+      ],
+      "headers":{
+         "Content-Type":"application/json"
+      }
+   }
+}'
+
 # See all apis
 curl http://$HOST/__admin/

@@ -245,7 +245,7 @@ paths:
                 type: integer
               numSeatsPerTable:
                 type: integer
-              seatPlayers:
+              seats:
                 type: array
                 items:
                   $ref: "#/definitions/SeatPlayer"
@@ -255,7 +255,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: "#/definitions/SeatedPlayer"
+              $ref: "#/definitions/Table"
         400:
           description: invalid input
 
@@ -411,7 +411,7 @@ definitions:
       tables:
         type: array
         items:
-          $ref: "#/definitions/SeatedPlayer"
+          $ref: "#/definitions/Seat"
 
   GamePlayer:
     required:
@@ -447,22 +447,28 @@ definitions:
       table:
         type: integer
 
-  SeatedPlayer:
+  Table:
     required:
-      - seated
+      - table
     properties:
-      table:
+      number:
         type: integer
-      seated:
+      seats:
         type: array
         items:
-          required:
-            - nameSeat
-          properties:
-            name:
-              type: string
-            seat:
-              type: integer
+          $ref: "#/definitions/Seat"
+
+
+  Seat:
+    required:
+      - seat
+    properties:
+      number:
+        type: integer
+      gamePlayerId:
+        type: integer
+      gamePlayerName:
+        type: string
 
   Clock:
     required:
