@@ -356,5 +356,31 @@ curl -X POST http://$HOST/__admin/mappings -d '
    }
 }'
 
+# Get the supplies
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"GET",
+      "url":"/api/v2/supplies"
+   },
+   "response":{
+      "jsonBody":{
+         "kittyAmount":430,
+         "supplies":[
+            {
+               "cost":54,
+               "date":"2018-06-03",
+               "description":"copec decks",
+               "name":"Brian Baker",
+               "type":"CARDS"
+            }
+         ]
+      },
+      "headers":{
+         "Content-Type":"application/json"
+      }
+   }
+}'
+
 # See all apis
 curl http://$HOST/__admin/

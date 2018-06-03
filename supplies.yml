@@ -9,10 +9,11 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
-host: api.texastoc.com
-basePath: /v2
+host: api-texastoc.herokuapp.com
+basePath: /api/v2
 
 schemes:
+ - http
  - https
 
 paths:
@@ -34,7 +35,7 @@ paths:
 
 definitions:
   Supply:
-    required: 
+    required:
       - supply
     properties:
       kittyAmount:
@@ -45,7 +46,7 @@ definitions:
           $ref: "#/definitions/Supplies"
 
   Supplies:
-    required: 
+    required:
       - supplies
     properties:
       date:
