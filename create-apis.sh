@@ -233,5 +233,33 @@ curl -X POST http://$HOST/__admin/mappings -d '
    }
 }'
 
+# Add a player to the current game
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"POST",
+      "url":"/api/v2/games/current/players"
+   },
+   "response":{
+      "jsonBody":{
+         "id":"1"
+      },
+      "headers":{
+         "Content-Type":"application/json"
+      }
+   }
+}'
+
+# Update a player in the current game
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"PUT",
+      "url":"/api/v2/games/current/players"
+   },
+   "response":{
+   }
+}'
+
 # See all apis
 curl http://$HOST/__admin/

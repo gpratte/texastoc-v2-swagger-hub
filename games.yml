@@ -116,7 +116,7 @@ paths:
                 type: boolean
       responses:
         200:
-          description: game changed
+          description: game updated
         400:
           description: invalid input
 
@@ -188,7 +188,7 @@ paths:
 
     put:
       summary: update player
-      description: will create a new player and add the player to the current game
+      description: will update the player in the game
       consumes:
       - application/json
       produces:
@@ -220,14 +220,8 @@ paths:
               banker:
                 type: boolean
       responses:
-        201:
-          description: a new player was created and added to the game
-          schema:
-            required:
-              - data
-            properties:
-              id:
-                type: integer
+        200:
+          description: player updated
         400:
           description: invalid input
 
