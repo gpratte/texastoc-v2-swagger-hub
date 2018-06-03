@@ -214,5 +214,24 @@ curl -X POST http://$HOST/__admin/mappings -d '
    }
 }'
 
+# Do not support getting players that are in the game
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"GET",
+      "url":"/api/v2/games/current/players?included=true"
+   },
+   "response":{
+      "status":400,
+      "jsonBody":{
+         "status":"Error",
+         "message":"included=true not supported"
+      },
+      "headers":{
+         "Content-Type":"application/json"
+      }
+   }
+}'
+
 # See all apis
 curl http://$HOST/__admin/
