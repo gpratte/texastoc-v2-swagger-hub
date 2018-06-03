@@ -186,5 +186,33 @@ curl -X POST http://$HOST/__admin/mappings -d '
    }
 }'
 
+# Get all the players that are not in the game
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"GET",
+      "url":"/api/v2/games/current/players?included=false"
+   },
+   "response":{
+      "jsonBody":[
+         {
+            "cell":null,
+            "email":null,
+            "id":1,
+            "name":"Brian Baker"
+         },
+         {
+            "cell":null,
+            "email":null,
+            "id":2,
+            "name":"John Hiatt"
+         }
+      ],
+      "headers":{
+         "Content-Type":"application/json"
+      }
+   }
+}'
+
 # See all apis
 curl http://$HOST/__admin/
