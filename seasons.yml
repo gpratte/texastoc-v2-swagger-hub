@@ -9,10 +9,11 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
-host: api.texastoc.com
-basePath: /v2
+host: api-texastoc.herokuapp.com
+basePath: /api/v2
 
 schemes:
+ - http
  - https
 
 paths:
@@ -29,7 +30,7 @@ paths:
           in: body
           description: new season information
           schema:
-            required: 
+            required:
               - season
             properties:
               monday:
@@ -47,51 +48,31 @@ paths:
         201:
           description: created a new season
           schema:
-            required: 
+            required:
               - data
             properties:
               id:
                 type: integer
         400:
           description: invalid input
-    get:
-      summary: get the current season 
-      description: return the current season along with the quarterly seasons
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      responses:
-        200:
-          description: the season
-          schema:
-            $ref: "#/definitions/Season"
 
-  /seasons/{id}:
+  /seasons/current:
     get:
-      summary: get the current season 
+      summary: get the current season
       description: return the current season along with the quarterly seasons
       consumes:
       - application/json
       produces:
       - application/json
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: the season id
-          type: integer
       responses:
         200:
           description: the season
           schema:
             $ref: "#/definitions/Season"
-        404:
-          description: invalid id
 
 definitions:
   Season:
-    required: 
+    required:
       - season
     properties:
       id:
@@ -124,7 +105,7 @@ definitions:
           $ref: "#/definitions/Quarter"
 
   Player:
-    required: 
+    required:
       - player
     properties:
       playerId:
@@ -139,7 +120,7 @@ definitions:
         type: integer
 
   Payout:
-    required: 
+    required:
       - payout
     properties:
       place:
@@ -148,7 +129,7 @@ definitions:
         type: integer
 
   Quarter:
-    required: 
+    required:
       - quarter
     properties:
       id:

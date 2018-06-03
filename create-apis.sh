@@ -382,5 +382,122 @@ curl -X POST http://$HOST/__admin/mappings -d '
    }
 }'
 
+# Create a new season
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"POST",
+      "url":"/api/v2/seasons"
+   },
+   "response":{
+      "jsonBody":{
+         "id":"1"
+      },
+      "headers":{
+         "Content-Type":"application/json"
+      }
+   }
+}'
+
+# Get the current season
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"GET",
+      "url":"/api/v2/seasons/current"
+   },
+   "response":{
+      "jsonBody":{
+         "annualTocAmount":0,
+         "buyIn":0,
+         "end":"2018-06-03",
+         "id":1,
+         "numGames":0,
+         "payouts":[
+            {
+               "amount":100,
+               "place":1
+            },
+            {
+               "amount":85,
+               "place":2
+            }
+         ],
+         "players":[
+            {
+               "entries":2,
+               "name":"Tom",
+               "place":1,
+               "playerId":100,
+               "points":100
+            },
+            {
+               "entries":1,
+               "name":"Dick",
+               "place":2,
+               "playerId":101,
+               "points":88
+            },
+            {
+               "entries":null,
+               "name":"Harry",
+               "place":null,
+               "playerId":102,
+               "points":null
+            }
+         ],
+         "quarterlySeasons":[
+            {
+               "end":"2018-06-03",
+               "id":1,
+               "numGames":0,
+               "payouts":[
+                  {
+                     "amount":100,
+                     "place":1
+                  },
+                  {
+                     "amount":85,
+                     "place":2
+                  }
+               ],
+               "players":[
+                  {
+                     "entries":2,
+                     "name":"Tom",
+                     "place":1,
+                     "playerId":100,
+                     "points":100
+                  },
+                  {
+                     "entries":1,
+                     "name":"Dick",
+                     "place":2,
+                     "playerId":101,
+                     "points":88
+                  },
+                  {
+                     "entries":null,
+                     "name":"Harry",
+                     "place":null,
+                     "playerId":102,
+                     "points":null
+                  }
+               ],
+               "quarter":1,
+               "quarterlyTocAmount":445,
+               "start":"2018-06-03"
+            }
+         ],
+         "rebuyAddOn":0,
+         "start":"2018-06-03"
+      },
+      "headers":{
+         "Content-Type":"application/json"
+      }
+   }
+}'
+
+
 # See all apis
 curl http://$HOST/__admin/
