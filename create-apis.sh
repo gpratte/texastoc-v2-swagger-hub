@@ -498,6 +498,51 @@ curl -X POST http://$HOST/__admin/mappings -d '
    }
 }'
 
+# Login
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"POST",
+      "url":"/api/v2/users/login"
+   },
+   "response":{
+      "jsonBody":{
+         "token":"a1b2c3-d4e5"
+      },
+      "headers":{
+         "Content-Type":"application/json"
+      }
+   }
+}'
+
+# Forgot password
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"POST",
+      "url":"/api/v2/users/password/forgot"
+   },
+   "response":{
+      "jsonBody":{
+         "code":"540643"
+      },
+      "headers":{
+         "Content-Type":"application/json"
+      }
+   }
+}'
+
+# Reset password
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"PUT",
+      "url":"/api/v2/users/password/reset"
+   },
+   "response":{
+     "status":204
+   }
+}'
 
 # See all apis
 curl http://$HOST/__admin/

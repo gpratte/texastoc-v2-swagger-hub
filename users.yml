@@ -9,11 +9,11 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
-host: api.texastoc.com
-basePath: /v2
+host: api-texastoc.herokuapp.com
+basePath: /api/v2
 
 schemes:
- - https
+ - http
 
 paths:
   /users/login:
@@ -29,7 +29,7 @@ paths:
           in: body
           description: user's email and password
           schema:
-            required: 
+            required:
               - credentials
             properties:
               email:
@@ -40,7 +40,7 @@ paths:
         201:
           description: logged in
           schema:
-            required: 
+            required:
               - data
             properties:
               token:
@@ -61,7 +61,7 @@ paths:
           in: body
           description: user's email and password
           schema:
-            required: 
+            required:
               - credentials
             properties:
               email:
@@ -70,7 +70,7 @@ paths:
         201:
           description: created a code
           schema:
-            required: 
+            required:
               - data
             properties:
               code:
@@ -91,7 +91,7 @@ paths:
           in: body
           description: user's email and password
           schema:
-            required: 
+            required:
               - credentials
             properties:
               email:

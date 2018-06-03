@@ -14,7 +14,6 @@ basePath: /api/v2
 
 schemes:
  - http
- - https
 
 paths:
   /games:
