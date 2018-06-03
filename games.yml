@@ -115,7 +115,7 @@ paths:
               finished:
                 type: boolean
       responses:
-        200:
+        204:
           description: game updated
         400:
           description: invalid input
@@ -135,7 +135,7 @@ paths:
           description: true to get the players that have already been added to game, false for the other players
           type: boolean
       responses:
-        201:
+        200:
           description: a list of players
           schema:
             type: array
@@ -220,7 +220,7 @@ paths:
               banker:
                 type: boolean
       responses:
-        200:
+        204:
           description: player updated
         400:
           description: invalid input
@@ -303,8 +303,10 @@ paths:
                 type: integer
                 description: set to change the seconds otherwise null
       responses:
-        201:
+        200:
           description: clock changed
+          schema:
+           $ref: "#/definitions/Clock"
         400:
           description: invalid input
 
@@ -497,5 +499,5 @@ definitions:
         type: integer
       bigBlind:
         type: integer
-      Ante:
+      ante:
         type: integer

@@ -292,5 +292,69 @@ curl -X POST http://$HOST/__admin/mappings -d '
    }
 }'
 
+# Get the current game clock
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"GET",
+      "url":"/api/v2/games/current/clock"
+   },
+   "response":{
+      "jsonBody":{
+         "clockId":1,
+         "minutes":20,
+         "nextRound":{
+            "ante":0,
+            "bigBlind":100,
+            "round":2,
+            "smallBlind":50
+         },
+         "playing":false,
+         "seconds":0,
+         "thisRound":{
+            "ante":0,
+            "bigBlind":50,
+            "round":1,
+            "smallBlind":25
+         }
+      },
+      "headers":{
+         "Content-Type":"application/json"
+      }
+   }
+}'
+
+# Update the current game clock
+curl -X POST http://$HOST/__admin/mappings -d '
+{
+   "request":{
+      "method":"PUT",
+      "url":"/api/v2/games/current/clock"
+   },
+   "response":{
+      "jsonBody":{
+         "clockId":1,
+         "minutes":20,
+         "nextRound":{
+            "ante":0,
+            "bigBlind":100,
+            "round":2,
+            "smallBlind":50
+         },
+         "playing":false,
+         "seconds":0,
+         "thisRound":{
+            "ante":0,
+            "bigBlind":50,
+            "round":1,
+            "smallBlind":25
+         }
+      },
+      "headers":{
+         "Content-Type":"application/json"
+      }
+   }
+}'
+
 # See all apis
 curl http://$HOST/__admin/
